@@ -15,7 +15,7 @@ const CLIENT_PORT =
 const app = express();
 app.use(
   cors({
-    origin: process.env.RENDER_EXTERNAL_HOST,
+    origin: 'https://mmmm-84pq.onrender.com',
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
