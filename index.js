@@ -8,14 +8,14 @@ require("dotenv").config();
 const args = process.argv;
 const p_index = args.indexOf("--p");
 const cp_index = args.indexOf("--cp");
-const PORT = process.env.PORT || (p_index !== -1 ? args[p_index + 1] : 5001);
+const PORT = process.env.PORT || (p_index !== -1 ? args[p_index + 1]);
 const CLIENT_PORT =
-  process.env.CLIENT_PORT || (cp_index !== -1 ? args[cp_index + 1] : 3000);
+  process.env.CLIENT_PORT || (cp_index !== -1 ? args[cp_index + 1]);
 
 const app = express();
 app.use(
   cors({
-    origin: process.env.RENDER_EXTERNAL_HOST || "http://localhost:3000",
+    origin: process.env.RENDER_EXTERNAL_HOST,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
@@ -25,10 +25,10 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running`);
 });
 
 const db = new sqlite3.Database("softserve.db", (err) => {
