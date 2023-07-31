@@ -7,7 +7,7 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: 'https://mmmm-84pq.onrender.com',
+    origin: 'https://mmmm-ezxc.onrender.com',
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
