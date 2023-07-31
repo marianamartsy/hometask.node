@@ -4,14 +4,6 @@ const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 require("dotenv").config();
 
-//Cnfigure ports
-const args = process.argv;
-const p_index = args.indexOf("--p");
-const cp_index = args.indexOf("--cp");
-const PORT = process.env.PORT || (p_index !== -1 ? args[p_index + 1]);
-const CLIENT_PORT =
-  process.env.CLIENT_PORT || (cp_index !== -1 ? args[cp_index + 1]);
-
 const app = express();
 app.use(
   cors({
@@ -19,23 +11,19 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
+
 app.get('/', (req, res) => {
   res.send('root page ');
 });
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => {
-  console.log(`Server running`);
-});
 
 const db = new sqlite3.Database("softserve.db", (err) => {
   if (err) {
     console.error(err.message);
   }
-  console.log("Connected to  database.");
+  console.log("Connected to database.");
 });
 
 // CREATE
@@ -122,15 +110,4 @@ app.delete("/products/:id", (req, res) => {
   const sql = `DELETE FROM products WHERE id = ?`;
   db.run(sql, id, function (err) {
     if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    if (this.changes === 0) {
-      res.status(404).json({ error: "Product not found" });
-      return;
-    }
-    res.json({
-      message: "Product deleted successfully.",
-    });
-  });
-});
+      res
