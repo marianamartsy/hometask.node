@@ -110,4 +110,15 @@ app.delete("/products/:id", (req, res) => {
   const sql = `DELETE FROM products WHERE id = ?`;
   db.run(sql, id, function (err) {
     if (err) {
-      res
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (this.changes === 0) {
+      res.status(404).json({ error: "Product not found" });
+      return;
+    }
+    res.json({
+      message: "Product deleted successfully.",
+    });
+  });
+});
