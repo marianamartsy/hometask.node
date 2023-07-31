@@ -8,14 +8,14 @@ require("dotenv").config();
 const args = process.argv;
 const p_index = args.indexOf("--p");
 const cp_index = args.indexOf("--cp");
-const PORT = p_index !== -1 ? args[p_index + 1] : process.env.PORT || 5001;
+const PORT = process.env.PORT || (p_index !== -1 ? args[p_index + 1] : 5001);
 const CLIENT_PORT =
-  cp_index !== -1 ? args[cp_index + 1] : process.env.CLIENT_PORT || 3000;
+  process.env.CLIENT_PORT || (cp_index !== -1 ? args[cp_index + 1] : 3000);
 
 const app = express();
 app.use(
   cors({
-    origin: `http://localhost:${CLIENT_PORT}`,
+    origin: process.env.RENDER_EXTERNAL_HOST || "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
@@ -24,6 +24,8 @@ app.get('/', (req, res) => {
 });
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
