@@ -4,6 +4,13 @@ const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 require("dotenv").config();
 
+const args = process.argv;
+const p_index = args.indexOf("--p");
+const cp_index = args.indexOf("--cp");
+const PORT = p_index !== -1 ? args[p_index + 1] : process.env.PORT || 5001;
+const CLIENT_PORT =
+  cp_index !== -1 ? args[cp_index + 1] : process.env.CLIENT_PORT || 3000;
+
 const app = express();
 app.use(
   cors({
@@ -18,7 +25,9 @@ app.get('/', (req, res) => {
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.listen(PORT, () => {
+  console.log(`Server running`);
+});
 const db = new sqlite3.Database("softserve.db", (err) => {
   if (err) {
     console.error(err.message);
