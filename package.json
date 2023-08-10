@@ -18,6 +18,8 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
+    "jest": "^29.6.2",
+    "jest-worker": "^29.6.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   }
