@@ -51,7 +51,7 @@ jobs:
       # Build and test the project
       - name: Build and test project
         run: |
-          npm run build
+          npm start
           npm test
 
       # Update the repository with the modified code
