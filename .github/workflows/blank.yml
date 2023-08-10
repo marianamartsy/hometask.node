@@ -6,7 +6,8 @@ name: CI for hometask.node
 on:
   # Triggers the workflow on push events to the "main" branch
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
   # Triggers the workflow on pull request events with types "opened" and "synchronize"
   pull_request:
@@ -19,8 +20,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This job is responsible for building and testing the hometask.node project
-  build_and_test:
+  # This job is responsible for running tests and other checks for the hometask.node project
+  test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -30,29 +31,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Run the workflow only when triggered by a push event to the main branch
-      - name: Check branch
-        run: |
-          if [[ ${{ github.ref }} != 'refs/heads/main' ]]; then
-            echo "This workflow only runs on the main branch. Exiting..."
-            exit 78
-          fi
-
       # Install Node.js and npm
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 14 # Use the appropriate Node.js version here
 
       # Install project dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build and test the project
-      - name: Build and test project
-        run: |
-          npm start
-          npm test
+      # Run tests
+      - name: Run tests
+        run: npm test
+
 
       # Update the repository with the modified code
       - name: Update code in repository
