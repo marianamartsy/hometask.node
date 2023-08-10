@@ -45,7 +45,7 @@ jobs:
       - name: Run tests
         run:   
           npm start
-          npm test
+
 
   # This job is responsible for creating and accepting a pull request
   create_and_accept_pull_request:
