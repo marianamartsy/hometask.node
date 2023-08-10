@@ -45,17 +45,6 @@ jobs:
       - name: Run tests
         run: npm test
 
-
-      # Update the repository with the modified code
-      - name: Update code in repository
-        run: |
-          # Add commands to commit and push the modified code
-
-      # Add a link to the workflow in the repository
-      - name: Add workflow link
-        run: |
-          # Add commands to print a link to the workflow run
-
   # This job is responsible for creating and accepting a pull request
   create_and_accept_pull_request:
     runs-on: ubuntu-latest
@@ -74,12 +63,8 @@ jobs:
       - name: Create pull request
         uses: marianamartsy/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
           branch: feature/update-code
           title: "Update project code"
           body: "This pull request updates the project code in response to CI."
 
-      # Accept the pull request
-      - name: Accept pull request
-        run: |
-          # Add commands to accept the pull request
