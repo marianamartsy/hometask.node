@@ -35,6 +35,13 @@ jobs:
       - name: Create new branch for PR
         run: git checkout -b ci-pr-${{ github.run_id }}
 
+      - name: Commit changes
+        run: |
+          git config user.name "mariana"
+          git config user.email "mart7mariana@gmail.com"
+          git commit -am "CI: Automated changes"
+          git push origin ci-pr-${{ github.run_id }}
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
