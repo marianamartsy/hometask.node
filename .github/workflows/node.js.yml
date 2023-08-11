@@ -43,7 +43,7 @@ jobs:
 
       # Create a pull request
     - name: Create pull request
-      uses: marianamartsy/hometask.node@v2
+      uses: actions/checkout@v2
       with:
         token: ${{ secrets.TOKEN }}
         branch: feature/update-code
