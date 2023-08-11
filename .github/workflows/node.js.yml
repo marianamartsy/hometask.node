@@ -43,11 +43,12 @@ jobs:
 
       # Create a pull request
     - name: Create pull request
-      uses: actions/checkout@v2
+      uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.TOKEN }}
         branch: feature/update-code
         title: "Update project code"
         body: "This pull request updates the project code in response to CI."
+
 
 
