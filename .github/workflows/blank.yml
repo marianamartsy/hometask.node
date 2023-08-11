@@ -20,16 +20,16 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This job is responsible for running tests and other checks for the hometask.node project
-  test:
-    # The type of runner that the job will run on
+  build:
+  
     runs-on: ubuntu-latest
+
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Install Node.js and npm
       - name: Setup Node.js
@@ -63,7 +63,7 @@ jobs:
 
       # Create a pull request
       - name: Create pull request
-        uses: marianamartsy/hometask.node@v3
+        uses: marianamartsy/hometask.node
         with:
           token: ${{ secrets.TOKEN }}
           branch: feature/update-code
