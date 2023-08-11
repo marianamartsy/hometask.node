@@ -45,7 +45,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.MY_TOKEN }}
           commit-message: "Automated PR from CI"
           title: Automated CI Pull Request
           body: |
