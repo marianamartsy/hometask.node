@@ -37,8 +37,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config user.name "CI Bot"
-          git config user.email "ci-bot@example.com"
+          git config user.name "marianamartsy"
+          git config user.email "mart7mariana@gmail.com"
           git commit -am "CI: Automated changes"
           git push origin ci-pr-${{ github.run_id }}
 
