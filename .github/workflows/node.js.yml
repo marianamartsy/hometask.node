@@ -7,8 +7,12 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-
+    types:
+      - opened
+      - synchronize
+    
+  workflow_dispatch:
+  
 jobs:
   build:
 
@@ -17,7 +21,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        
 
     steps:
     - uses: actions/checkout@v3
@@ -29,3 +33,21 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+ 
+
+      # Create a new branch
+    - name: Create new branch
+      run: |
+          git checkout -b feature/update-code
+          git push origin feature/update-code
+
+      # Create a pull request
+    - name: Create pull request
+      uses: marianamartsy/hometask.node@v3
+      with:
+        token: ${{ secrets.TOKEN }}
+        branch: feature/update-code
+        title: "Update project code"
+        body: "This pull request updates the project code in response to CI."
+
+
